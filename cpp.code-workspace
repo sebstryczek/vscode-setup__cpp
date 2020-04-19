@@ -1,0 +1,96 @@
+{
+	"folders": [
+		{
+			"path": "./"
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"type": "shell",
+				"label": "Pre-Debug",
+				"command": "[ ! -d ./bin ] && mkdir ./bin; [ -d ./bin/Debug ] && rm -rf ./bin/Debug; mkdir ./bin/Debug"
+			},
+			{
+				"type": "shell",
+				"label": "Debug",
+				"dependsOn":["Pre-Debug"],
+				"command": "/usr/bin/clang++",
+				"args": [
+					"./src/main.cpp",
+					"-std=c++17",
+					"-stdlib=libc++",
+					"-g",
+					"-o",
+					"./bin/Debug/${workspaceFolderBasename}"
+				],
+				"options": {
+					"cwd": "."
+				},
+				"problemMatcher": ["$gcc"],
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				}
+			},
+			{
+				"type": "shell",
+				"label": "Pre-Build",
+				"command": "[ ! -d ./bin ] && mkdir ./bin; [ -d ./bin/Release ] && rm -rf ./bin/Release; mkdir ./bin/Release"
+			},
+			{
+				"type": "shell",
+				"label": "Build",
+				"dependsOn":["Pre-Build"],
+				"command": "/usr/bin/clang++",
+				"args": [
+					"./src/main.cpp",
+					"-std=c++17",
+					"-stdlib=libc++",
+					"-o",
+					"./bin/Release/${workspaceFolderBasename}"
+				],
+				"options": {
+					"cwd": "."
+				},
+				"problemMatcher": ["$gcc"],
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				}
+			},
+			{
+				"type": "shell",
+				"label": "Run",
+				"dependsOn":["Build"],
+				"command": "./bin/Release/${workspaceFolderBasename}",
+				"problemMatcher": [],
+			},
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Debug",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${workspaceRoot}/bin/Debug/${workspaceFolderBasename}",
+				"args": [],
+				"stopAtEntry": true,
+				"cwd": ".",
+				"environment": [],
+				"externalConsole": false,
+				"MIMode": "lldb",
+				"preLaunchTask": "Debug"
+			}
+		],
+		"compounds": [],
+	}
+}
