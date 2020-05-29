@@ -6,8 +6,11 @@
 	],
 	"extensions": {
 		"recommendations": [
-			"ms-vscode.cpptools"
+			"ms-vscode.cpptools",
 		]
+	},
+	"settings": {
+		"editor.formatOnSave": true,
 	},
 	"tasks": {
 		"version": "2.0.0",
