@@ -23,7 +23,9 @@
 			{
 				"type": "shell",
 				"label": "Debug",
-				"dependsOn":["Pre-Debug"],
+				"dependsOn": [
+					"Pre-Debug"
+				],
 				"command": "/usr/bin/clang++",
 				"args": [
 					"./src/main.cpp",
@@ -36,7 +38,9 @@
 				"options": {
 					"cwd": "."
 				},
-				"problemMatcher": ["$gcc"],
+				"problemMatcher": [
+					"$gcc"
+				],
 				"group": {
 					"kind": "build",
 					"isDefault": true
@@ -50,7 +54,9 @@
 			{
 				"type": "shell",
 				"label": "Build",
-				"dependsOn":["Pre-Build"],
+				"dependsOn": [
+					"Pre-Build"
+				],
 				"command": "/usr/bin/clang++",
 				"args": [
 					"./src/main.cpp",
@@ -62,7 +68,9 @@
 				"options": {
 					"cwd": "."
 				},
-				"problemMatcher": ["$gcc"],
+				"problemMatcher": [
+					"$gcc"
+				],
 				"group": {
 					"kind": "build",
 					"isDefault": true
@@ -71,10 +79,12 @@
 			{
 				"type": "shell",
 				"label": "Run",
-				"dependsOn":["Build"],
+				"dependsOn": [
+					"Build"
+				],
 				"command": "./bin/Release/${workspaceFolderBasename}",
-				"problemMatcher": [],
-			},
+				"problemMatcher": []
+			}
 		]
 	},
 	"launch": {
@@ -86,12 +96,25 @@
 				"request": "launch",
 				"program": "${workspaceRoot}/bin/Debug/${workspaceFolderBasename}",
 				"args": [],
-				"stopAtEntry": true,
+				"stopAtEntry": false,
 				"cwd": ".",
 				"environment": [],
 				"externalConsole": false,
 				"MIMode": "lldb",
 				"preLaunchTask": "Debug"
+			},
+			{
+				"name": "Run",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${workspaceRoot}/bin/Release/${workspaceFolderBasename}",
+				"args": [],
+				"stopAtEntry": false,
+				"cwd": ".",
+				"environment": [],
+				"externalConsole": false,
+				"MIMode": "lldb",
+				"preLaunchTask": "Build",
 			}
 		],
 		"compounds": [],
